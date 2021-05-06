@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  metabase_postgres:
+    build:
+      context: ./dockerfile
+      dockerfile: Dockerfile_postgres
+    container_name: ${METABASE_PG}
+    image: metabase/postgres:12
+    volumes:
+      - ./db/data:/var/lib/postgresql/data
+      - ./db/entrypoint:/docker-entrypoint-initdb.d
+      - ./db/config/postgresql.conf:/etc/postgresql.conf
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - TZ=Asia/Tokyo
+    command: 'postgres -c config_file="/etc/postgresql.conf"'
+    restart: unless-stopped
+
+  metabase:
+    container_name: metabase
+    image: metabase/metabase:latest
+    depends_on:
+      - ${METABASE_PG}
+    ports:
+      - "13000:3000"
+    environment:
+      - MB_DB_TYPE=postgres
+      - MB_DB_DBNAME=${POSTGRES_DB}
+      - MB_DB_PORT=5432
+      - MB_DB_USER=${POSTGRES_USER}
+      - MB_DB_PASS=${POSTGRES_PASSWORD}
+      - MB_DB_HOST=${METABASE_PG}
+      - MB_PASSWORD_COMPLEXITY=weak
+      - MB_PASSWORD_LENGTH=3
+      - JAVA_TIMEZONE=Asia/Tokyo
+    restart: unless-stopped

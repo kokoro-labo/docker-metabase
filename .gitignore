@@ -2,7 +2,7 @@
 .env
 
 # Database Volumes
-volumes/
+db/data/
 
 # General
 .DS_Store
