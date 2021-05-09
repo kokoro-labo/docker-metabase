@@ -1,9 +1,6 @@
 # Docker Setting
 .env
 
-# Database Volumes
-db/data/
-
 # General
 .DS_Store
 .AppleDouble
