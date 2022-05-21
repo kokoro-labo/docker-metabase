@@ -17,8 +17,6 @@ fi
 printf "\n>>> make db/data dir...\n"
 
 mkdir -p "./db/data"
-touch db/data/.gitignore
-printf "*\n!.gitignore\n" >> db/data/.gitignore
 
 printf "\n>>> cleanup completed\n"
 
