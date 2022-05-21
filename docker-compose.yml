@@ -6,7 +6,7 @@ services:
       context: ./dockerfile
       dockerfile: Dockerfile_postgres
     container_name: ${METABASE_PG}
-    image: metabase/postgres:12
+    image: metabase/postgres:14
     volumes:
       - ./db/data:/var/lib/postgresql/data
       - ./db/entrypoint:/docker-entrypoint-initdb.d

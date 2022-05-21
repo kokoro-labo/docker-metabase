@@ -14,5 +14,5 @@ sh cleanup.sh
 
 ## Use Images
 
-* PosgreSQL:12
+* PosgreSQL:14
 * Metabase:latest
