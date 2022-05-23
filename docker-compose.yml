@@ -4,8 +4,10 @@ services:
   metabase_postgres:
     build:
       context: ./dockerfile
-      dockerfile: Dockerfile_postgres
+      dockerfile: postgres.Dockerfile
     container_name: ${METABASE_PG}
+    hostname: ${METABASE_PG}
+    user: postgres:postgres
     image: metabase/postgres:14
     volumes:
       - ./db/data:/var/lib/postgresql/data
