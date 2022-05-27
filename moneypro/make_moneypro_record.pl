@@ -7,12 +7,12 @@
 ## perl make_transaction_record.pl <MoneyPro.csv>
 ##
 ## 【事後作業】
-## 出力された sql を MoneyPro DB にインポート
+## 出力された <output.sql> を実行し、 MoneyPro テーブルにデータを挿入
 ##
 ## $ docker exec -it metabase_postgres /bin/bash
 ## su - postgres
-## psql
-## SQL> \i output.sql
+## psql -d datalake
+## SQL> \i <output.sql>
 ##
 ##############################################################
 
@@ -37,7 +37,7 @@ if(@ARGV == 1)
         {
           $d[$i] =~ s/\((.+)\)/\-$1/g;
         }
-        if($i == 4 || $i == 5) # カテゴリー末尾に半角空白があるため削除
+        if($i == 4 || $i == 5) # カテゴリーに半角空白があるため削除
         {
           $d[$i] =~ s/^\s*//; # 先頭空白削除
           $d[$i] =~ s/\s*$//; # 末尾空白削除
